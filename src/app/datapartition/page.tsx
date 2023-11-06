@@ -1,10 +1,13 @@
+import { getServerSession } from "next-auth";
 import Layout from "../components/layout"
 
-export default function DataPartion() {
-    
+export default async function DataPartion() {
+    const session = await getServerSession();
+console.log(session)
     return (
         <Layout>
-            <h1>Data-Partion</h1>
+            { session &&
+            <h1>Data-Partion</h1>}
       </Layout>
     )
 }

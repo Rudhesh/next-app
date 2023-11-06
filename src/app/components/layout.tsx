@@ -31,6 +31,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Button } from '@mui/material';
 import ThemeButton from './ThemeButton';
 import { ThemeProvider } from 'next-themes'
+import Login from '../login/page';
 
 const menuItems = [
   {
@@ -149,8 +150,15 @@ export default function Layout({ children }: any) {
 
   const { data: session }: any = useSession();
 console.log(session)
+const handleSignOut = async () => {
+  await signOut();
+  router.push('/login');
+};
 
-  
+  // if (!session) {
+  //   return (
+  //     <Login/>)
+  // }
   return (
     <ThemeProvider>
     <Box sx={{ display: 'flex' }}>
@@ -179,7 +187,7 @@ console.log(session)
                 
               /> :null}
               
-                
+               <div className='cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded ' onClick={() => router.push("/admin")}>Admin</div>
          
         </Toolbar>
         
@@ -252,9 +260,7 @@ console.log(session)
               className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded-lg ${
                 pathname === "/" ? 'bg-[#303f57] text-gray-100 rounded-lg' : 'text-white'
               }`}
-              onClick={() => {
-                signOut();
-              }}
+              onClick={handleSignOut}
             >
                 <div className='ml-10'>
                  <span  className="mr-2"> <LogoutIcon /></span>
