@@ -148,6 +148,8 @@ export default function Layout({ children }: any) {
   };
 
   const { data: session }: any = useSession();
+console.log(session)
+
   
   return (
     <ThemeProvider>
@@ -213,20 +215,17 @@ export default function Layout({ children }: any) {
         <List className="bg-[#384D6C] text-white flex flex-col text-xs h-screen">
           <div className="mb-10 flex flex-col items-center">
             <AccountCircleIcon style={{ fontSize: '66px' }} />
-            {/* {!session ? <div>no name</div>: <> <Typography variant="subtitle1" className="text-white">
-            {session.user?.name} 
+            {!session ? <div>no name</div>: <> <Typography variant="subtitle1" className="text-white">
+            {session.user?.realname} 
             
             </Typography>
-            <Typography variant="subtitle1" className="text-white">
+            <Typography className="text-white text-ls">
             
             {session.user?.role}
             </Typography></>
             }
-            */}
-              <Typography variant="subtitle1" className="text-white">
-              John Conner
-            </Typography>
-            <Typography variant="subtitle2">USER</Typography>
+           
+          
           
           </div>
           {menuItems.map((menu, index) => (
