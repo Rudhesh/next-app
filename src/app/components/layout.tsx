@@ -152,7 +152,6 @@ export default function Layout({ children }: any) {
   };
 
   const { data: session }: any = useSession();
-console.log(session)
 const handleSignOut = async () => {
   await signOut({ callbackUrl: '/' });
   
@@ -163,6 +162,8 @@ if (!session) {
   router.push('/');
   return null; // Don't render anything in this case
 }
+
+ 
 
   return (
     <ThemeProvider>
@@ -197,18 +198,21 @@ if (!session) {
              
               
               <div className="flex space-x-6">
+
+     {         (session?.user.role === "admin") ?
       <div
         className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
         onClick={() => router.push("/admin")}
       >
         Admin
-      </div>
+      </div>: null }
+      {         (session?.user.role === "data-admin") ?
       <div
         className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
         onClick={() => router.push("/dataAdmin")}
       >
         Data-Admin
-      </div>
+      </div>:null}
       <div
         className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
         onClick={() => router.push("/dashboard")}
@@ -298,13 +302,32 @@ if (!session) {
           
           </div>
           {menuItems.map((menu, index) => (
-            <div  key={index} ><div className={`ml-7 text-sm ${index === 0 ? '' : 'mt-10'}`}>
+            <div  key={index} >
+              <div className={`ml-7 text-sm ${index === 0 ? '' : 'mt-10'}`}>
             {menu.heading}
-          </div><div>{menu.items.map((item, itemIndex) => (
+          </div>
+          <div>
+          {menu.items
+          .filter((item) => {
+            // Filter out items based on user's role
+            if (session) {
+              if (session.user.role === 'user') {
+                // Exclude items based on user's role
+                return (
+                  item.path !== '/datapartition' &&
+                  item.path !== '/nodegraph' &&
+                  item.path !== '/import'
+                );
+              }
+            }
+            return true; // Include all other items
+          })
+            .map((item, itemIndex) => (
+             
               <ListItem
               key={itemIndex}
-              className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded-lg ${
-                pathname === item.path ? 'bg-[#303f57] text-gray-100 rounded-lg' : 'text-white'
+              className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded ${
+                pathname === item.path ? 'bg-[#303f57] text-gray-100 rounded' : 'text-white'
               }`}
               onClick={() => router.push(item.path)}
             >
@@ -313,13 +336,18 @@ if (!session) {
                   {item.text}
                 </div>
               </ListItem>
-            ))}</div></div> 
+             
+            ))}
+            
+            </div>
+            
+            </div> 
           ))}
           
                 <ListItem
               
-              className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded-lg ${
-                pathname === "/" ? 'bg-[#303f57] text-gray-100 rounded-lg' : 'text-white'
+              className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded ${
+                pathname === "/" ? 'bg-[#303f57] text-gray-100 rounded' : 'text-white'
               }`}
               onClick={handleSignOut}
             >
