@@ -199,14 +199,14 @@ if (!session) {
               
               <div className="flex space-x-6">
 
-     {         (session?.user.role === "admin") ?
+     {         (session?.user?.role === "admin") ?
       <div
         className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
         onClick={() => router.push("/admin")}
       >
         Admin
       </div>: null }
-      {         (session?.user.role === "data-admin") ?
+      {         (session?.user?.role === "data-admin") ?
       <div
         className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
         onClick={() => router.push("/dataAdmin")}
@@ -303,15 +303,19 @@ if (!session) {
           </div>
           {menuItems.map((menu, index) => (
             <div  key={index} >
-              <div className={`ml-7 text-sm ${index === 0 ? '' : 'mt-10'}`}>
-            {menu.heading}
-          </div>
+            {session?.user?.role === 'user' ? menu.heading !== 'CONFIGURATION' && (
+        <div className={`ml-7 text-sm ${index === 0 ? '' : 'mt-10'}`}>
+          {menu.heading}
+        </div>
+      ): <div className={`ml-7 text-sm ${index === 0 ? '' : 'mt-10'}`}>
+          {menu.heading}
+        </div>}
           <div>
           {menu.items
           .filter((item) => {
             // Filter out items based on user's role
             if (session) {
-              if (session.user.role === 'user') {
+              if (session?.user?.role === 'user') {
                 // Exclude items based on user's role
                 return (
                   item.path !== '/datapartition' &&
