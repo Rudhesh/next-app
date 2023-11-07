@@ -28,10 +28,13 @@ import {useRouter} from "next/navigation"
 import {usePathname} from "next/navigation"
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import ThemeButton from './ThemeButton';
 import { ThemeProvider } from 'next-themes'
-import Login from '../login/page';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import TranslateIcon from '@mui/icons-material/Translate';
+import { deepOrange } from '@mui/material/colors';
+
 
 const menuItems = [
   {
@@ -151,20 +154,23 @@ export default function Layout({ children }: any) {
   const { data: session }: any = useSession();
 console.log(session)
 const handleSignOut = async () => {
-  await signOut();
-  router.push('/login');
+  await signOut({ callbackUrl: '/' });
+  
 };
 
-  // if (!session) {
-  //   return (
-  //     <Login/>)
-  // }
+if (!session) {
+  // Redirect to the '/login' route if session is undefined
+  router.push('/');
+  return null; // Don't render anything in this case
+}
+
   return (
     <ThemeProvider>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{ backgroundColor: "#384D6C" }}>
-        <Toolbar className='top-bar' >
+      <Toolbar className="flex justify-between items-center">
+    <div className="flex items-center">
         <IconButton onClick={handleDrawerClose}>
        
           {open ?   <MenuOpenIcon  style={{ color: 'white' }} />:null}
@@ -186,9 +192,64 @@ const handleSignOut = async () => {
                 alt="Breitfuss Logo"
                 
               /> :null}
+
+</div>
+             
               
-               <div className='cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded ' onClick={() => router.push("/admin")}>Admin</div>
-         
+              <div className="flex space-x-6">
+      <div
+        className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+        onClick={() => router.push("/admin")}
+      >
+        Admin
+      </div>
+      <div
+        className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+        onClick={() => router.push("/dataAdmin")}
+      >
+        Data-Admin
+      </div>
+      <div
+        className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+        onClick={() => router.push("/dashboard")}
+      >
+        Dashboard
+      </div>
+      <div
+        className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+        onClick={() => router.push("/panel")}
+      >
+        Panel
+      </div>
+      </div>
+      <div className="flex space-x-4">
+      <div
+        className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+        onClick={() => router.push("/panel")}
+      >
+        <TranslateIcon/>
+      </div>
+      <div
+        className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+        onClick={() => router.push("/panel")}
+      >
+        <NotificationsNoneIcon/>
+      </div>
+
+      <div
+        className="cursor-pointer  hover-bg-[#303f57] transition duration-300 rounded"
+        onClick={() => router.push("/panel")}
+      >
+        <Avatar sx={{ bgcolor: deepOrange[500], width: 34, height: 34 }}>R</Avatar>
+
+      </div>
+      
+
+      
+      
+      
+    </div>
+    
         </Toolbar>
         
       </AppBar>

@@ -7,13 +7,13 @@ export default withAuth({
      
       const userRole = token?.user?.role;
 
-      if (req.nextUrl.pathname.startsWith("/panel")) {
-        // Check for "admin" or "super admin" role
-        return userRole === "admin";
-      } else if (req.nextUrl.pathname.startsWith("/user")) {
-        // Check for "super admin" role for the "/superAdmin" route
-        return userRole === "user";
-      }
+      // if (req.nextUrl.pathname.startsWith("/panel")) {
+      //   // Check for "admin" or "super admin" role
+      //   return userRole === "admin";
+      // } else if (req.nextUrl.pathname.startsWith("/user")) {
+      //   // Check for "super admin" role for the "/superAdmin" route
+      //   return userRole === "user";
+      // }
 
       return !!token;
     },

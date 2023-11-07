@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import BlueWave from "../components/blueWave";
 
 const Login = () => {
   const router = useRouter();
@@ -107,6 +108,7 @@ const Login = () => {
         </div>
       </div>
       </div>
+      <BlueWave />
       </div>
     )
   );
