@@ -1,6 +1,7 @@
 import User from "@/models/User";
 import connect from "@/utils/db";
 import bcrypt from "bcryptjs";
+import { disconnect } from "mongoose";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: any) => {
@@ -29,5 +30,17 @@ export const POST = async (request: any) => {
     return new NextResponse(err, {
       status: 500,
     });
+  }
+};
+
+export const GET = async (req: Request, res: NextResponse) => {
+  try {
+    await connect();
+    const users = await User.find();
+    return NextResponse.json({ message: "Success", users }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  } finally {
+    await disconnect();
   }
 };
