@@ -151,12 +151,13 @@ export default function Layout({ children }: any) {
     setOpen(false);
   };
 
-  const { data: session }: any = useSession();
-const handleSignOut = async () => {
-  await signOut({ callbackUrl: '/' });
-  
-};
+  const { data: session, status }: any = useSession(); 
 
+
+  if (status === "loading") {
+    return <p>Loading...</p>; // Or any loading indicator
+  }
+ 
 if (!session) {
   // Redirect to the '/login' route if session is undefined
   router.push('/');
@@ -221,10 +222,11 @@ if (!session) {
       </div>
       <div
         className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
-        onClick={() => router.push("/panel")}
+        onClick={() => router.push("/register")}
       >
-        Panel
+        Register
       </div>
+      
       </div>
       <div className="flex space-x-4">
       <div
@@ -353,7 +355,7 @@ if (!session) {
               className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded ${
                 pathname === "/" ? 'bg-[#303f57] text-gray-100 rounded' : 'text-white'
               }`}
-              onClick={handleSignOut}
+              onClick={()=>signOut({ callbackUrl: '/' })}
             >
                 <div className='ml-10'>
                  <span  className="mr-2"> <LogoutIcon /></span>

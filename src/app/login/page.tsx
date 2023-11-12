@@ -92,12 +92,12 @@ const Login = () => {
             </button>
             <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
           </form>
-          {/* <Link
+          <Link
             className="block text-center text-blue-500 hover:underline mt-2"
             href="/register"
           >
             Register Here
-          </Link> */}
+          </Link>
 
           <p className="mt-10 text-center text-sm text-gray-500">
           Made with love at {" "}

@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 
-const Register = () => {
+const UserForm = () => {
   const [error, setError] = useState("");
-  const router = useRouter();
-  const { data: session, status: sessionStatus } = useSession();
 
+ 
 
   const isValidEmail = (email: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -49,7 +46,7 @@ const Register = () => {
       }
       if (res.status === 200) {
         setError("");
-        router.push("/login");
+        
       }
     } catch (error) {
       setError("Error, try again");
@@ -57,12 +54,10 @@ const Register = () => {
     }
   };
 
-  if (sessionStatus === "loading") {
-    return <h1>Loading...</h1>;
-  }
+ 
 
   return (
-    sessionStatus === "authenticated" && (
+(
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="bg-[#212121] p-8 rounded shadow-md w-96">
           <h1 className="text-4xl text-center font-semibold mb-8">Register</h1>
@@ -113,4 +108,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UserForm;
