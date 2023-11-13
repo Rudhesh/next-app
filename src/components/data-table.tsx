@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({
     <>
       {/* Filters */}
 
-      <div className="flex items-center justify-between">
+      <div className=" flex items-center justify-between">
         <div className="flex items-center py-4">
           <Input
             placeholder="Search by name..."
@@ -87,7 +87,7 @@ export function DataTable<TData, TValue>({
         {/* Column visibility */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className="bg-[#ffffff] ml-auto">
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className="capitalize bg-[#ffffff]"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
@@ -114,7 +114,7 @@ export function DataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className="rounded-md border">
+      <div className=" bg-[#ffffff] rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

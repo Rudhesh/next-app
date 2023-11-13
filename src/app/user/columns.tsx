@@ -15,11 +15,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export type User = {
-  id: string;
-  name: string;
-  emaiL: string;
-  image: string;
-  lastSeen: string;
+  _id: string;
+  realname: string;
+  role: string;
+  email: string;
 };
 
 export const columns: ColumnDef<User>[] = [
@@ -58,12 +57,12 @@ export const columns: ColumnDef<User>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-[#ffffff]">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.id)}
+              onClick={() => navigator.clipboard.writeText(user.realname)}
             >
-              Copy user ID
+              Copy user name
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>

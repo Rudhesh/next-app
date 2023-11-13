@@ -1,25 +1,29 @@
-
-import { getServerSession } from "next-auth";
-import React from "react";
-import { authOptions} from "../api/auth/[...nextauth]/route";
+import Link from "next/link";
 import Layout from "../components/layout";
+import { User, columns } from "./columns";
+import { DataTable } from "@/components/data-table";
+import { Button } from "@mui/material";
+
+async function getUsers(): Promise<User[]> {
+  const res = await fetch("http://localhost:3000/api/register");
+  const data = await res.json();
+  return data.users;
+}
 
 export default async function User() {
-    const session = await getServerSession(authOptions);
-    return (
-        <Layout>
-            <h1>User</h1>
-            <div className="flex items-center justify-center">
-      <div className="bg-sky-100 text-slate-700 p-2 rounded shadow grid grid-cols-2 mt-9">
-        <p>Name:</p>
-        <p>{session?.user.realname}</p>
-        <p>Email:</p>
-        <p>{session?.user.email}</p>
-        <p>Role:</p>
-        <p>{session?.user.role}</p>
+  const data = await getUsers();
+  console.log(data);
+  return (
+    <Layout>
+      <div className="bg-[#Ecf9ff] p-10 rounded">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2x1 font-bold">Users</h1>
+          <Link href="/register">
+            <Button>Register</Button>
+          </Link>
+        </div>
+        <DataTable columns={columns} data={data} />
       </div>
-   
-</div>
-      </Layout>
-    )
+    </Layout>
+  );
 }
