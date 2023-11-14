@@ -3,11 +3,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button } from "../../components/ui/button";
 
 const RegistrationForm = () => {
   const [open, setOpen] = useState(false);
@@ -85,8 +85,8 @@ const RegistrationForm = () => {
   return (
     sessionStatus === "authenticated" && (
       <div>
-        <Button variant="contained" onClick={handleClickOpen}>
-          Update
+        <Button variant="outline" onClick={handleClickOpen}>
+          Add User
         </Button>
 
         <Dialog

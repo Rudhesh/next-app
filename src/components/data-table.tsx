@@ -33,6 +33,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import RegistrationForm from "@/app/components/registrationForm";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,7 +65,7 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  console.log(table.getAllColumns());
+  console.log("table.getAllColumns()");
 
   return (
     <>
@@ -83,9 +84,9 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
           />
         </div>
-
+        <RegistrationForm />
         {/* Column visibility */}
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="bg-[#ffffff] ml-auto">
               Columns
@@ -110,7 +111,7 @@ export function DataTable<TData, TValue>({
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
 
       {/* Table */}
@@ -167,6 +168,10 @@ export function DataTable<TData, TValue>({
 
       {/* Pagination */}
       <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
         <Button
           variant="outline"
           size="sm"
