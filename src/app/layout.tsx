@@ -8,6 +8,8 @@ import Providers from "./providers";
 import Link from "next/link";
 import ThemeButton from "./components/ThemeButton";
 import { cn } from "@/lib/utils";
+import Nav from "./components/nav";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,7 +35,14 @@ export default async function RootLayout({
             fontSans.variable
           )}
         >
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </body>
       </SessionProvider>
     </html>

@@ -34,6 +34,7 @@ import { ThemeProvider } from "next-themes";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { deepOrange } from "@mui/material/colors";
+import { ModeToggle } from "@/components/ui/toggle-theme";
 
 const menuItems = [
   {
@@ -127,18 +128,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function Layout({ children }: any) {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const toggleDrawer = () => {
+    setOpen(!open);
   };
 
   const { data: session, status }: any = useSession();
@@ -156,41 +152,24 @@ export default function Layout({ children }: any) {
   return (
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          open={open}
-          sx={{ backgroundColor: "#384D6C" }}
-        >
-          <Toolbar className="flex justify-between items-center">
+        {/* <CssBaseline /> */}
+        <div style={{ position: "fixed", paddingLeft: "150px" }}>
+          <Toolbar className="flex justify-between items-center ml-20">
             <div className="flex items-center">
-              <IconButton onClick={handleDrawerClose}>
-                {open ? <MenuOpenIcon style={{ color: "white" }} /> : null}
-              </IconButton>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ mr: 2, ...(open && { display: "none" }) }}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              {!open ? (
-                <Image
-                  src="/logo-breitfuss(1).png"
-                  height={125}
-                  width={125}
-                  alt="Breitfuss Logo"
-                />
-              ) : null}
+              <div className="flex items-center">
+                <IconButton
+                  className="flex items-center text-black dark:text-white"
+                  onClick={toggleDrawer}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </div>
             </div>
 
             <div className="flex space-x-6">
               {session?.user?.role === "admin" ? (
                 <div
-                  className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+                  className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800	  transition duration-300  rounded "
                   onClick={() => router.push("/admin")}
                 >
                   Admin
@@ -198,20 +177,20 @@ export default function Layout({ children }: any) {
               ) : null}
               {session?.user?.role === "data-admin" ? (
                 <div
-                  className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+                  className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300  rounded "
                   onClick={() => router.push("/dataAdmin")}
                 >
                   Data-Admin
                 </div>
               ) : null}
               <div
-                className="cursor-pointer p-1 hover:bg-[#303f57] transition duration-300  rounded "
+                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300  rounded "
                 onClick={() => router.push("/dashboard")}
               >
                 Dashboard
               </div>
               <div
-                className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
                 onClick={() => router.push("/register")}
               >
                 Register
@@ -219,31 +198,27 @@ export default function Layout({ children }: any) {
             </div>
             <div className="flex space-x-4">
               <div
-                className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
                 onClick={() => router.push("/panel")}
               >
                 <TranslateIcon />
               </div>
               <div
-                className="cursor-pointer p-1 hover-bg-[#303f57] transition duration-300 rounded"
+                className="cursor-pointer p-1 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
                 onClick={() => router.push("/panel")}
               >
                 <NotificationsNoneIcon />
               </div>
 
               <div
-                className="cursor-pointer  hover-bg-[#303f57] transition duration-300 rounded"
+                className="cursor-pointer hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
                 onClick={() => router.push("/panel")}
-              >
-                <Avatar
-                  sx={{ bgcolor: deepOrange[500], width: 34, height: 34 }}
-                >
-                  R
-                </Avatar>
-              </div>
+              ></div>
             </div>
+            {/* <ModeToggle /> */}
+            <ThemeButton />
           </Toolbar>
-        </AppBar>
+        </div>
 
         <Drawer
           sx={{
@@ -258,17 +233,17 @@ export default function Layout({ children }: any) {
           anchor="left"
           open={open}
         >
-          <DrawerHeader className="bg-[#384D6C] flex flex-col">
+          <DrawerHeader className=" bg-white dark:bg-black flex flex-col">
             <Image
-              src="/logo-breitfuss(1).png"
+              className=" bg-blend-lighten hover:bg-blend-darken mb-7"
+              src="/logo-breitfuss.png"
               height={125}
               width={125}
               alt="Breitfuss Logo"
-              className="mb-7"
             />
           </DrawerHeader>
 
-          <List className="bg-[#384D6C] text-white flex flex-col text-xs h-screen">
+          <List className=" bg-white dark:bg-black text-black dark:text-white text-black flex flex-col text-xs h-screen">
             <div className="mb-10 flex flex-col items-center">
               <AccountCircleIcon style={{ fontSize: "66px" }} />
               {!session ? (
@@ -276,10 +251,11 @@ export default function Layout({ children }: any) {
               ) : (
                 <>
                   {" "}
-                  <Typography variant="subtitle1" className="text-white">
+                  <div className="text-black dark:text-white"></div>
+                  <Typography variant="subtitle1">
                     {session.user?.realname}
                   </Typography>
-                  <Typography className="text-white text-ls">
+                  <Typography className="text-ls">
                     {session.user?.role}
                   </Typography>
                 </>
@@ -319,10 +295,10 @@ export default function Layout({ children }: any) {
                     .map((item, itemIndex) => (
                       <ListItem
                         key={itemIndex}
-                        className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded ${
+                        className={`cursor-pointer mt-2 hover:bg-gray-200 hover:dark:bg-neutral-800 transition duration-300  rounded ${
                           pathname === item.path
-                            ? "bg-[#303f57] text-gray-100 rounded"
-                            : "text-white"
+                            ? "bg-gray-200 dark:bg-neutral-800 text-black dark:text-white  rounded"
+                            : " dark:text-white text-black "
                         }`}
                         onClick={() => router.push(item.path)}
                       >
@@ -337,16 +313,15 @@ export default function Layout({ children }: any) {
             ))}
 
             <ListItem
-              className={`cursor-pointer mt-2 hover:bg-[#303f57] transition duration-300  rounded ${
+              className={`cursor-pointer mt-2 hover:bg-gray-200 hover:dark:bg-gray-950 transition duration-300 rounded ${
                 pathname === "/"
-                  ? "bg-[#303f57] text-gray-100 rounded"
-                  : "text-white"
+                  ? "bg-white dark:bg-black text-black dark:text-white rounded"
+                  : "dark:text-white text-black"
               }`}
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               <div className="ml-10">
                 <span className="mr-2">
-                  {" "}
                   <LogoutIcon />
                 </span>
                 Log out

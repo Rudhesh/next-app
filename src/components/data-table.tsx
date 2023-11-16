@@ -65,8 +65,6 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  console.log("table.getAllColumns()");
-
   return (
     <>
       {/* Filters */}
@@ -115,7 +113,7 @@ export function DataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className=" bg-[#ffffff] rounded-md border">
+      <div className="  rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
