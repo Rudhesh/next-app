@@ -35,6 +35,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { deepOrange } from "@mui/material/colors";
 import { ModeToggle } from "@/components/ui/toggle-theme";
+import FavDashboard from "./favDashboard";
 
 const menuItems = [
   {
@@ -94,30 +95,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   }),
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  height: appBarHeight, // Set the height here
-  display: "flex", // Use flex display
-  justifyContent: "center", // Center the content horizontally
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -153,23 +130,22 @@ export default function Layout({ children }: any) {
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
         {/* <CssBaseline /> */}
-        <div style={{ position: "fixed", paddingLeft: "150px" }}>
-          <Toolbar className="flex justify-between items-center ml-20">
-            <div className="flex items-center">
-              <div className="flex items-center">
-                <IconButton
-                  className="flex items-center text-black dark:text-white"
-                  onClick={toggleDrawer}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </div>
+        <div className="fixed min-w-full shadow-md dark:shadow-none z-10">
+          <div className="flex justify-between  ">
+            <div>
+              <IconButton
+                className="flex items-center text-black dark:text-white"
+                style={{ marginLeft: "240px" }} // Add this line
+                onClick={toggleDrawer}
+              >
+                <MenuIcon />
+              </IconButton>
             </div>
 
             <div className="flex space-x-6">
               {session?.user?.role === "admin" ? (
                 <div
-                  className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800	  transition duration-300  rounded "
+                  className=" cursor-pointer flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
                   onClick={() => router.push("/admin")}
                 >
                   Admin
@@ -177,47 +153,41 @@ export default function Layout({ children }: any) {
               ) : null}
               {session?.user?.role === "data-admin" ? (
                 <div
-                  className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300  rounded "
+                  className="cursor-pointer flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
                   onClick={() => router.push("/dataAdmin")}
                 >
                   Data-Admin
                 </div>
               ) : null}
-              <div
-                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300  rounded "
-                onClick={() => router.push("/dashboard")}
-              >
-                Dashboard
+              <div className="cursor-pointer flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
+                <FavDashboard />
               </div>
               <div
-                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
-                onClick={() => router.push("/register")}
+                className="cursor-pointer flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+                onClick={() => router.push("/test")}
               >
-                Register
+                Panel
               </div>
             </div>
             <div className="flex space-x-4">
               <div
-                className="cursor-pointer p-2 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
-                onClick={() => router.push("/panel")}
+                className=" cursor-pointerflex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                onClick={() => router.push("/dashboard")}
               >
                 <TranslateIcon />
               </div>
               <div
-                className="cursor-pointer p-1 hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
+                className=" cursor-pointer flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700"
                 onClick={() => router.push("/panel")}
               >
                 <NotificationsNoneIcon />
               </div>
-
-              <div
-                className="cursor-pointer hover:bg-gray-200 hover:dark:bg-neutral-800  transition duration-300 rounded"
-                onClick={() => router.push("/panel")}
-              ></div>
+              <div>
+                <ThemeButton />
+              </div>
             </div>
             {/* <ModeToggle /> */}
-            <ThemeButton />
-          </Toolbar>
+          </div>
         </div>
 
         <Drawer
@@ -235,7 +205,7 @@ export default function Layout({ children }: any) {
         >
           <DrawerHeader className=" bg-white dark:bg-black flex flex-col">
             <Image
-              className=" bg-blend-lighten hover:bg-blend-darken mb-7"
+              className=" bg-blend-lighten hover:bg-blend-darken mb-5"
               src="/logo-breitfuss.png"
               height={125}
               width={125}
