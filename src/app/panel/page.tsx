@@ -11,7 +11,7 @@ export default function Panel() {
       {/* <h1>Panel</h1>
       <Graph data={MOCK_DATA} />
       <DataTable columns={columns} data={MOCK_DATA} /> */}
-      <EditPanel />
+      <EditPanel data={MOCK_DATA} />
     </Layout>
   );
 }

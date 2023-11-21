@@ -61,7 +61,7 @@ const Login = () => {
       <div className="flex flex-col h-screen">
         <div className=" flex justify-center mt-20  ">
           <div style={{ width: "25%" }}>
-            <div className=" shadow-lg flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white rounded">
+            <div className=" shadow-lg flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-50 rounded">
               <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <div className="flex justify-center ">
                   <Image

@@ -130,7 +130,7 @@ export default function Layout({ children }: any) {
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
         {/* <CssBaseline /> */}
-        <div className="fixed min-w-full shadow-md dark:shadow-none z-10">
+        <div className="fixed min-w-full bg-gray-50 dark:bg-zinc-950 shadow-md dark:shadow-none z-10">
           <div className="flex justify-between  ">
             <div>
               <IconButton
@@ -203,7 +203,7 @@ export default function Layout({ children }: any) {
           anchor="left"
           open={open}
         >
-          <DrawerHeader className=" bg-white dark:bg-black flex flex-col">
+          <DrawerHeader className=" bg-gray-50 dark:bg-zinc-950 flex flex-col">
             <Image
               className=" bg-blend-lighten hover:bg-blend-darken mb-5"
               src="/logo-breitfuss.png"
@@ -213,7 +213,7 @@ export default function Layout({ children }: any) {
             />
           </DrawerHeader>
 
-          <List className=" bg-white dark:bg-black text-black dark:text-white text-black flex flex-col text-xs h-screen">
+          <List className="bg-gray-50 dark:bg-zinc-950 text-black dark:text-white flex flex-col text-xs h-screen">
             <div className="mb-10 flex flex-col items-center">
               <AccountCircleIcon style={{ fontSize: "66px" }} />
               {!session ? (
@@ -285,7 +285,7 @@ export default function Layout({ children }: any) {
             <ListItem
               className={`cursor-pointer mt-2 hover:bg-gray-200 hover:dark:bg-gray-950 transition duration-300 rounded ${
                 pathname === "/"
-                  ? "bg-white dark:bg-black text-black dark:text-white rounded"
+                  ? "bg-gray-50 dark:bg-black text-black dark:text-white rounded"
                   : "dark:text-white text-black"
               }`}
               onClick={() => signOut({ callbackUrl: "/" })}
@@ -299,7 +299,7 @@ export default function Layout({ children }: any) {
             </ListItem>
           </List>
         </Drawer>
-        <Main open={open}>
+        <Main open={open} className="bg-gray-50 dark:bg-zinc-950">
           <DrawerHeader />
           {children}
         </Main>

@@ -1,30 +1,28 @@
-// components/Table.tsx
-
 import React from "react";
 
 interface TableProps {
-  channels: string[];
+  data: Record<string, any>[];
 }
 
-const Table: React.FC<TableProps> = ({ channels }) => {
+const Table: React.FC<TableProps> = ({ data }) => {
+  const headers = Object.keys(data[0] || {});
+
   return (
-    <div className="bg-gray-800 text-white p-4">
-      <h3 className="text-xl font-semibold mb-4">Table</h3>
-      <table className="min-w-full bg-gray-900 border border-gray-700">
+    <div>
+      <table className="min-w-full border border-gray-300 dark:border-gray-700">
         <thead>
           <tr>
-            <th className="border-b border-gray-700">Channel</th>
-            {/* Add more header columns as needed */}
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {channels.map((channel, index) => (
-            <tr
-              key={index}
-              className={index % 2 === 0 ? "bg-gray-800" : "bg-gray-700"}
-            >
-              <td className="border-b border-gray-700 p-2">{channel}</td>
-              {/* Add more columns as needed */}
+          {data.map((item, index) => (
+            <tr key={index}>
+              {headers.map((header) => (
+                <td key={header}>{item[header]}</td>
+              ))}
             </tr>
           ))}
         </tbody>

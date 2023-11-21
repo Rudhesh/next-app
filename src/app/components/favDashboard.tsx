@@ -10,7 +10,7 @@ const FavDashboard = () => {
     <div>
       <Popover>
         <PopoverTrigger>Dashboard</PopoverTrigger>
-        <PopoverContent className="bg-white dark:bg-black">
+        <PopoverContent className="bg-gray-50 dark:bg-black">
           <ul>
             <li>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
@@ -18,18 +18,7 @@ const FavDashboard = () => {
             </li>
             <li>Lorem ipsum dolor sit amet.</li>
             <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
-            <li>red</li>
+
             <li>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
               recusandae?

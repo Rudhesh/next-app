@@ -42,7 +42,7 @@ const AbsoluteTimeRange: React.FC<AbsoluteTimeRangeProps> = ({ onApply }) => {
           </svg>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="bg-white dark:bg-black">
+      <PopoverContent className="bg-gray-50 dark:bg-black">
         <div className="flex items-center space-x-4">
           <form onSubmit={handleSubmit}>
             <div className="flex items-center space-x-2">

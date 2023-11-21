@@ -54,7 +54,7 @@ const Modal = ({ isOpen, onClose, onSubmit }: any) => {
         <div className="flex items-center justify-center min-h-screen">
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-          <div className="relative bg-white dark:bg-gray-800 rounded-lg mx-4 p-6 max-w-md w-full">
+          <div className="relative bg-gray-50 dark:bg-gray-800 rounded-lg mx-4 p-6 max-w-md w-full">
             <div className="absolute top-0 right-0 pt-2 pr-4">
               <button
                 onClick={onClose}
