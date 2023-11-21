@@ -23,5 +23,7 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/models/User.js", "src/models/User.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "types": ["react-hook-form", "other types..."],
+
 }
