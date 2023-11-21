@@ -73,7 +73,7 @@ const EditPanel: React.FC<GraphProps> = ({ data }) => {
   return (
     <div className="dark:text-white flex">
       <div className="flex flex-col flex-grow">
-        <div className="flex justify-between items-center border-2 border-gray-100 dark:border-gray-800 p-4 m-2">
+        <div className="flex justify-between items-center bg-slate-50 dark:bg-zinc-900 border-2 border-slate-200	rounded dark:border-gray-800 p-4 m-2">
           <h2 className="text-2xl font-semibold">Edit Panel</h2>
           <div className="flex">
             {" "}
@@ -84,16 +84,16 @@ const EditPanel: React.FC<GraphProps> = ({ data }) => {
           </div>
         </div>
 
-        {/* <div className="border-2 border-gray-100 dark:border-gray-800 p-4 m-2">
+        {/* <div className="border-2 border-slate-200 dark:border-gray-800 p-4 m-2">
           {" "}
           <Graph channels={channels} selectedTime={selectedTime} />
         </div> */}
-        <div className="border-2 border-gray-100 dark:border-gray-800 p-4 m-2">
+        <div className="bg-slate-50 dark:bg-zinc-900 border-2 border-slate-200 dark:border-gray-800 rounded p-4 m-2">
           {" "}
           <Graph data={filteredData} />
         </div>
         {/* Graph component with channels and selected time as props */}
-        <div className="border-2 border-gray-100 dark:border-gray-800 p-4 m-2">
+        <div className="bg-slate-50 dark:bg-zinc-900 border-2 border-slate-200 dark:border-gray-800 rounded p-4 m-2">
           {" "}
           {/* <Table data={filteredData} /> */}
           <DataTable columns={columns} data={filteredData} />
@@ -101,7 +101,7 @@ const EditPanel: React.FC<GraphProps> = ({ data }) => {
 
         {/* Table component with channels as props */}
       </div>
-      <div className="border-2 border-gray-100 dark:border-gray-800 p-4 m-2 ">
+      <div className="bg-slate-50 dark:bg-zinc-900 border-2 border-slate-200 dark:border-gray-800 rounded p-4 m-2 ">
         {" "}
         <Button variant="outline" className=" px-4 py-2 ">
           Share

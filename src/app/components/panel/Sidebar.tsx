@@ -4,7 +4,7 @@ import React from "react";
 
 const Sidebar: React.FC = () => {
   return (
-    <div className="overflow-y-auto  mt-4 p-4">
+    <div className="overflow-y-auto  mt-2 p-4">
       <h3 className="text-xl font-semibold mb-4">Tools</h3>
       <ul>
         <li className="mb-2">Tool 1</li>
