@@ -1,13 +1,11 @@
 import { getServerSession } from "next-auth";
-import Layout from "../components/layout"
+import Layout from "../components/layout";
+import TestForm from "../components/testForm";
 
 export default async function NodeGraph() {
-    const session = await getServerSession();
-
-    return (
-        <Layout>
-             
-            <h1>Node-Graph</h1>
-      </Layout>
-    )
+  return (
+    <Layout>
+      <TestForm />
+    </Layout>
+  );
 }

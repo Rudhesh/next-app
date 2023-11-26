@@ -6,14 +6,18 @@ import { Button } from "@mui/material";
 import RegistrationForm from "../components/registrationForm";
 
 async function getUsers(): Promise<User[]> {
-  const res = await fetch("http://localhost:3000/api/register");
+  const res = await fetch("http://localhost:3000/api/register", {
+    cache: "no-cache",
+    next: { tags: ["data"] },
+  });
   const data = await res.json();
+  console.log(data);
   return data.users;
 }
 
 export default async function User() {
   const data = await getUsers();
-  console.log("data");
+  console.log(data);
   return (
     <Layout>
       <div className="p-10 rounded">

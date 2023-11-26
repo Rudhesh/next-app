@@ -16,7 +16,7 @@ export default async function User() {
   console.log("data");
   return (
     <Layout>
-      <div className="bg-[#Ecf9ff] p-10 rounded">
+      <div className=" p-10 rounded">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2x1 font-bold">User Management</h1>
         </div>

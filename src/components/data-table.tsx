@@ -34,6 +34,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import RegistrationForm from "@/app/components/registrationForm";
+import UserForm from "@/app/components/userForm";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -83,6 +84,7 @@ export function DataTable<TData, TValue>({
           />
         </div>
         <RegistrationForm />
+        {/* <UserForm /> */}
         {/* Column visibility */}
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>

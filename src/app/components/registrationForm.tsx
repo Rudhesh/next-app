@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Modal from "./modal";
+import { revalidateTag } from "next/cache";
 
 const RegistrationForm = () => {
   const [open, setOpen] = useState(false);
@@ -22,9 +23,8 @@ const RegistrationForm = () => {
   const { data: session, status: sessionStatus } = useSession();
 
   const handleSubmit = async (data1: any) => {
-    console.log("second");
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,9 +34,6 @@ const RegistrationForm = () => {
 
       if (res.status === 400) {
         setError("This email is already registered");
-      } else if (res.status === 200) {
-        setError("");
-        router.push("/login"); // Redirect to login page after successful registration
       } else {
         setError("Unexpected error occurred");
       }
@@ -44,6 +41,8 @@ const RegistrationForm = () => {
       setError("Error, try again");
       console.error(error);
     }
+
+    revalidateTag("data");
   };
 
   if (sessionStatus === "loading") {
@@ -51,14 +50,12 @@ const RegistrationForm = () => {
   }
 
   return (
-    sessionStatus === "authenticated" && (
-      <div>
-        <Button variant="outline" onClick={handleClickOpen}>
-          Add User
-        </Button>
-        <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} />
-      </div>
-    )
+    <div>
+      <Button variant="outline" onClick={handleClickOpen}>
+        Add User
+      </Button>
+      <Modal isOpen={open} onClose={handleClose} onSubmit={handleSubmit} />
+    </div>
   );
 };
 

@@ -1,10 +1,7 @@
-"use client";
+import { revalidateTag } from "next/cache";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 const UserForm = () => {
-  const [error, setError] = useState("");
-
   const isValidEmail = (email: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
@@ -27,7 +24,7 @@ const UserForm = () => {
     }
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,16 +36,17 @@ const UserForm = () => {
           password,
         }),
       });
-      if (res.status === 400) {
-        setError("This email is already registered");
-      }
-      if (res.status === 200) {
-        setError("");
-      }
+      //   if (res.status === 400) {
+      //     setError("This email is already registered");
+      //   }
+      //   if (res.status === 200) {
+      //     setError("");
+      //   }
     } catch (error) {
       setError("Error, try again");
       console.log(error);
     }
+    revalidateTag("data");
   };
 
   return (
@@ -85,9 +83,9 @@ const UserForm = () => {
             className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
           >
             {" "}
-            Register
+            Registerqq
           </button>
-          <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+          {/* <p className="text-red-600 text-[16px] mb-4">{error && error}</p> */}
         </form>
         <div className="text-center text-gray-500 mt-4">- OR -</div>
         <Link
@@ -102,3 +100,6 @@ const UserForm = () => {
 };
 
 export default UserForm;
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
+}

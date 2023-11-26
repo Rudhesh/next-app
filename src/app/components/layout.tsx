@@ -299,7 +299,7 @@ export default function Layout({ children }: any) {
             </ListItem>
           </List>
         </Drawer>
-        <Main open={open} className="bg-slate-100 dark:bg-zinc-950">
+        <Main open={open}>
           <DrawerHeader />
           {children}
         </Main>

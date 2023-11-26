@@ -17,6 +17,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   const graphRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
+    console.log(data);
     const margin = { top: 20, right: 20, bottom: 30, left: 50 };
     const width = window.innerWidth - margin.left - margin.right;
     const height = window.innerHeight - margin.top - margin.bottom;
@@ -61,7 +62,8 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       .attr("x", (d) => xScale(new Date(d.time_stamp)) + 10)
       .attr("y", (d) => yScale(d.value) - 5)
       .text((d) => `Value: ${d.value}, Time: ${d.time_stamp}`)
-      .attr("font-size", "12px");
+      .attr("font-size", "12px ")
+      .style("fill", "gray"); // Set the font color to gray
 
     const xAxis = d3.axisBottom(xScale);
     g.append("g").attr("transform", `translate(0,${height})`).call(xAxis);
@@ -75,6 +77,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       ref={graphRef}
       viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}
       preserveAspectRatio="xMidYMid meet"
+      className="dark:text-white"
     />
   );
 };
