@@ -7,17 +7,19 @@ import { useTheme } from "next-themes";
 
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { ModeToggle } from "@/components/ui/toggle-theme";
+import ResizableComponents from "../components/resize";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
 
   return (
     <Layout>
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="container">
           <h1 className="text-2x1 font-bold">{JSON.stringify(session)}</h1>
         </div>
-      </section>
+      </section> */}
+      <ResizableComponents />
     </Layout>
   );
 }
